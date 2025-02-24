@@ -42,7 +42,7 @@ const FormPage: React.FC = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name as keyof FormData]) {
-      setErrors((prev) => ({ ...prev, [name]: undefined }));
+      console.log('Errors occured');
     }
   };
 
@@ -60,6 +60,11 @@ const FormPage: React.FC = () => {
             <h3 className="text-lg font-semibold">Employee Information</h3>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
+                {errors.firstName && (
+                  <span className="text-red-500 text-sm">
+                    {errors.firstName}
+                  </span>
+                )}
                 <label htmlFor="firstName">First Name</label>
                 <Input
                   id="firstName"
@@ -67,13 +72,13 @@ const FormPage: React.FC = () => {
                   value={formData.firstName}
                   onChange={handleInputChange}
                 />
-                {errors.firstName && (
-                  <span className="text-red-500 text-sm">
-                    {errors.firstName}
-                  </span>
-                )}
               </div>
               <div className="space-y-2">
+                {errors.lastName && (
+                  <span className="text-red-500 text-sm">
+                    {errors.lastName}
+                  </span>
+                )}
                 <label htmlFor="lastName">Last Name</label>
                 <Input
                   id="lastName"
@@ -81,11 +86,6 @@ const FormPage: React.FC = () => {
                   value={formData.lastName}
                   onChange={handleInputChange}
                 />
-                {errors.lastName && (
-                  <span className="text-red-500 text-sm">
-                    {errors.lastName}
-                  </span>
-                )}
               </div>
             </div>
           </div>
@@ -93,6 +93,11 @@ const FormPage: React.FC = () => {
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
+                {errors.employeeId && (
+                  <span className="text-red-500 text-sm">
+                    {errors.employeeId}
+                  </span>
+                )}
                 <label htmlFor="employeeId">Employee ID</label>
                 <Input
                   id="employeeId"
@@ -101,14 +106,14 @@ const FormPage: React.FC = () => {
                   onChange={handleInputChange}
                   placeholder="ABC-12345"
                 />
-                {errors.employeeId && (
-                  <span className="text-red-500 text-sm">
-                    {errors.employeeId}
-                  </span>
-                )}
               </div>
 
               <div className="space-y-2">
+                {errors.phoneNumber && (
+                  <span className="text-red-500 text-sm">
+                    {errors.phoneNumber}
+                  </span>
+                )}
                 <label htmlFor="phoneNumber">Phone Number</label>
                 <Input
                   id="phoneNumber"
@@ -117,16 +122,14 @@ const FormPage: React.FC = () => {
                   onChange={handleInputChange}
                   placeholder="+1 (555) 555-5555"
                 />
-                {errors.phoneNumber && (
-                  <span className="text-red-500 text-sm">
-                    {errors.phoneNumber}
-                  </span>
-                )}
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
+                {errors.salary && (
+                  <span className="text-red-500 text-sm">{errors.salary}</span>
+                )}
                 <label htmlFor="salary">Annual Salary</label>
                 <Input
                   id="salary"
@@ -136,9 +139,6 @@ const FormPage: React.FC = () => {
                   onChange={handleInputChange}
                   placeholder="Enter annual salary"
                 />
-                {errors.salary && (
-                  <span className="text-red-500 text-sm">{errors.salary}</span>
-                )}
               </div>
 
               <div className="space-y-2">
@@ -177,6 +177,11 @@ const FormPage: React.FC = () => {
               </div>
 
               <div className="space-y-2">
+                {errors.costCenter && (
+                  <span className="text-red-500 text-sm">
+                    {errors.costCenter}
+                  </span>
+                )}
                 <label htmlFor="costCenter">Cost Center</label>
                 <Input
                   id="costCenter"
@@ -185,16 +190,16 @@ const FormPage: React.FC = () => {
                   onChange={handleInputChange}
                   placeholder="CC-XXX-YYY"
                 />
-                {errors.costCenter && (
-                  <span className="text-red-500 text-sm">
-                    {errors.costCenter}
-                  </span>
-                )}
               </div>
             </div>
 
             <div className="space-y-2">
               <label htmlFor="projectCode">Project Code</label>
+              {errors.projectCode && (
+                <span className="text-red-500 text-sm">
+                  {errors.projectCode}
+                </span>
+              )}
               <Input
                 id="projectCode"
                 name="projectCode"
@@ -202,15 +207,15 @@ const FormPage: React.FC = () => {
                 onChange={handleInputChange}
                 placeholder="PRJ-2024-001"
               />
-              {errors.projectCode && (
-                <span className="text-red-500 text-sm">
-                  {errors.projectCode}
-                </span>
-              )}
             </div>
           </div>
 
           <div className="space-y-2">
+            {errors.privacyConsent && (
+              <span className="text-red-500 text-sm">
+                {errors.privacyConsent}
+              </span>
+            )}
             <div className="flex items-center space-x-2">
               <Checkbox
                 id="privacyConsent"
@@ -222,32 +227,31 @@ const FormPage: React.FC = () => {
                   }));
                 }}
               />
-              <label htmlFor="privacyConsent">
+              <label htmlFor="privacyConsent" className="text-xs" id="init">
                 I acknowledge that this document will be processed according to
                 regional privacy policies and data protection regulations
               </label>
             </div>
-            {errors.privacyConsent && (
-              <span className="text-red-500 text-sm">
-                {errors.privacyConsent}
-              </span>
-            )}
           </div>
 
-          <div className="flex justify-end space-x-4">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => navigate('/')}
-            >
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              className="border border-transparent hover:border-green-500"
-            >
-              Submit Document
-            </Button>
+          <div className="flex justify-end space-x-8" id="donttouch">
+            <div className="relative">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => navigate('/')}
+                id="init"
+              >
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                id="init"
+                className="border border-transparent hover:border-green-500 px-10"
+              >
+                Submit Document
+              </Button>
+            </div>
           </div>
         </form>
       </CardContent>

@@ -16,3 +16,6 @@ We use the [WAVE extension](https://wave.webaim.org/) to ensure accessibility wo
 ✅ The application is fully navigable by keyboard  
 ✅ All interactive elements are accessible via screen readers like NVDA.  
 ✅ Color contrast meets WCAG standards 
+
+#### Note
+There seem to be some styling and responsiveness issues in the form. If you notice any misalignment, layout problems, or unexpected behavior, address them and document the changes.

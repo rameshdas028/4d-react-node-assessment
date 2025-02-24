@@ -34,4 +34,10 @@
  
     --radius: 0.5rem;
   }
+  #init {
+    translate: 10rem;
+  }
+  #donttouch{
+    display: block;
+  }
 }
