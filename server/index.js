@@ -94,10 +94,7 @@ app.get('/api/submissions', (req, res) => {
   res.json(submissions);
 });
 
-const mediaDir = "./medias";
-if (!fs.existsSync(mediaDir)) {
-  fs.mkdirSync(mediaDir, { mediaDir: true });
-}
+
 
 const logDir = "./logs";
 if (!fs.existsSync(logDir)) {   
