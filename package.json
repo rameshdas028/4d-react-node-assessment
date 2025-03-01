@@ -27,8 +27,11 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cors": "^2.8.5",
+    "csv-parser": "^3.2.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "express-fileupload": "^1.5.1",
+    "joi": "^17.13.3",
     "jspdf": "^2.5.2",
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",
@@ -36,7 +39,8 @@
     "react-router-dom": "^7.1.5",
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7",
-    "uuid": "^11.0.5"
+    "uuid": "^11.0.5",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",

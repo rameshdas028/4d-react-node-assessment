@@ -2,6 +2,13 @@ import express from 'express';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import fileUpload from "express-fileupload";
+import fs from "fs";
+import route from './route.js';
+import logger from "./logger.js";
+
+
+
 import dotenv from 'dotenv';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -12,6 +19,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(fileUpload());
 app.use(cors());
 app.use(express.json());
 
@@ -81,9 +89,43 @@ app.post('/api/submit', (req, res) => {
   res.json({ data: formData });
 });
 
+
 app.get('/api/submissions', (req, res) => {
   res.json(submissions);
 });
+
+const mediaDir = "./medias";
+if (!fs.existsSync(mediaDir)) {
+  fs.mkdirSync(mediaDir, { mediaDir: true });
+}
+
+const logDir = "./logs";
+if (!fs.existsSync(logDir)) {   
+  fs.mkdirSync(logDir, { logDir: true });
+
+}
+
+
+app.use('/api', route);
+
+app.use((err,req,res,nex)=>{
+  const { statusCode, message,stack } = err;
+  const response ={
+    statusCode,
+    success:false,
+    message,
+  }
+  // this portion only used for development debug 
+  if (stack && process.env.NODE_ENV=='dev') {
+    response.stack=stack
+  }
+  logger.error(stack);
+  return res.status(statusCode).send(response);
+  
+  
+
+})
+
 
 app.get('*', (req, res) => {
   res.sendFile(join(__dirname, '../dist/index.html'));
