@@ -1,3 +1,4 @@
+"use strict";
 import csvParser from "csv-parser";
 import fs from "fs";
 import readline from "readline";
